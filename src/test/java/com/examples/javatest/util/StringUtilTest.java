@@ -13,7 +13,7 @@ public class StringUtilTest {
         }
         String result3 = StringUtil.repeat("Hola", 1);
         if(!result3.equals("Hola")){
-            System.err.println("Error!!");
+            throw new RuntimeException("Error!");
         }
     }
 }
