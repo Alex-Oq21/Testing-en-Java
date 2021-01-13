@@ -2,18 +2,17 @@ package com.examples.javatest.util;
 
 public class StringUtilTest {
     public static void main(String[] args) {
-    String result = StringUtil.repeat(" Qué más pues?", 3);
-        System.out.println(result);
+        assertEquals(StringUtil.repeat("Qué más pues?", 3), "Qué más pues?Qué más pues?Qué más pues?");
 
-        String result2 = StringUtil.repeat("Hola Mijo", 5);
-        if (result2.equals("Hola MijoHola MijoHola MijoHola MijoHola Mijo")){
-            System.out.println("Ok");
-        }else {
-            System.out.println("No pasa la prueba");
-        }
-        String result3 = StringUtil.repeat("Hola", 1);
-        if(!result3.equals("Hola")){
-            throw new RuntimeException("Error!");
+        assertEquals(StringUtil.repeat("Hola Mijo", 5), "Hola MijoHola MijoHola MijoHola MijoHola Mijo");
+
+        assertEquals(StringUtil.repeat("Hola", 1), "Hola");
+
+    }
+
+    private static void assertEquals(String actual, String expected) {
+        if(!actual.equals(expected)){
+            throw new RuntimeException(actual + " No es igual a " + expected);
         }
     }
 }
