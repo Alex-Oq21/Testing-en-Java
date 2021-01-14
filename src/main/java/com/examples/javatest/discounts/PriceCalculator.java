@@ -2,7 +2,7 @@ package com.examples.javatest.discounts;
 
 public class PriceCalculator {
 
-    /*public double getTotal() {
+    public double getTotal() {
         return 0;
-    }*/
+    }
 }
