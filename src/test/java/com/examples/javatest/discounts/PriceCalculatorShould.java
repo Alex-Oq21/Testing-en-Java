@@ -11,4 +11,11 @@ public class PriceCalculatorShould {
         PriceCalculator calculator = new PriceCalculator();
         assertThat(calculator.getTotal(), CoreMatchers.is(0.0));
     }
+    @Test
+    public void total_is_the_sum_of_prices(){
+        PriceCalculator calculator = new PriceCalculator();
+        calculator.addPrice(10.2);
+        calculator.addPrice(15.5);
+        assertThat(calculator.getTotal(), CoreMatchers.is(25.7));
+    }
 }
