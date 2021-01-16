@@ -34,7 +34,7 @@ public class MovieRepositoryIntegrationTest {
         movieRepository  = new MovieRepositoryjdbc(jdbcTemplate);
 
     }
-
+    //Listar todas las peliculas
     @Test
     public void load_all_movies() throws SQLException {
         Collection<Movie> movies = movieRepository.findAll();
@@ -46,13 +46,22 @@ public class MovieRepositoryIntegrationTest {
                 new Movie(5,"La morgue", 120, Genre.THRILLER)
         )));
     }
-
+    //Buscar pelicula por id
     @Test
     public void load_movie_by_id() {
         Movie movie = movieRepository.findById(2);
         assertThat(movie, CoreMatchers.is(new Movie(2, "Rapidos y furiosos", 130, Genre.ACTION)));
     }
+    //Insertar pelicula
+    @Test
+    public void insert_a_movie() {
+        Movie movie = new Movie("El código no compila", 230, Genre.HORROR);
+        movieRepository.saveOrUpdate(movie);
+        Movie newmovie = movieRepository.findById(6);
+        assertThat(newmovie, CoreMatchers.is(new Movie(6, "El código no compila", 230, Genre.HORROR)));
 
+    }
+    //Eliminar datos de la bd después de ejecutar los test
     @After
     public  void tearDown() throws Exception {
         final Statement s = dataSource.getConnection().createStatement();
