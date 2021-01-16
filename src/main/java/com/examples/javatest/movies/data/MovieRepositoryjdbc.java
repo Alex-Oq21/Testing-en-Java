@@ -1,5 +1,6 @@
 package com.examples.javatest.movies.data;
 
+import com.examples.javatest.movies.model.Genre;
 import com.examples.javatest.movies.model.Movie;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -23,12 +24,7 @@ public class MovieRepositoryjdbc implements MovieRepository {
 
     @Override
     public Collection<Movie> findAll() {
-        RowMapper<Movie> movieMapper = new RowMapper<Movie>() {
-            @Override
-            public Movie mapRow(ResultSet rs, int rowNum) throws SQLException {
-                return null;
-            }
-        };
+
         return jdbcTemplate.query("SELECT * FROM movies", movieMapper);
     }
 
@@ -36,4 +32,13 @@ public class MovieRepositoryjdbc implements MovieRepository {
     public void saveOrUpdate(Movie movie) {
 
     }
+    private static RowMapper<Movie> movieMapper = new RowMapper<Movie>() {
+        @Override
+        public Movie mapRow(ResultSet rs, int rowNum) throws SQLException {
+            return new Movie(rs.getInt("id"),
+                    rs.getString("name"),
+                    rs.getInt("minutes"),
+                    Genre.valueOf(rs.getString("genre")));
+        }
+    };
 }
